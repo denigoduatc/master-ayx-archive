@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资料索引 · 买球站信息导航</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #ffe9d0 0%, #ffd6b0 50%, #fec89a 100%);
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page-wrap {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* 顶部导航 —— 暖色卡片式 */
+        .top-nav {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(4px);
+            border-radius: 60px;
+            padding: 0.75rem 2rem;
+            margin-bottom: 3rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 6px 18px rgba(200, 120, 60, 0.12);
+        }
+
+        .logo-area {
+            font-weight: 600;
+            font-size: 1.15rem;
+            letter-spacing: 1px;
+            color: #7a4a2a;
+            background: #fce2c1;
+            padding: 0.25rem 1rem;
+            border-radius: 30px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #5d3a1f;
+            font-weight: 450;
+            padding: 0.25rem 0;
+            border-bottom: 2px solid transparent;
+            transition: 0.15s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            border-bottom-color: #b86b3b;
+            color: #3a240e;
+        }
+
+        /* 白色卡片主体 */
+        .card-white {
+            background: #fffffffa;
+            border-radius: 40px;
+            padding: 2.5rem 2.8rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 12px 28px rgba(140, 80, 30, 0.1);
+            transition: 0.2s ease;
+        }
+
+        .card-white h1 {
+            font-size: 2.2rem;
+            font-weight: 560;
+            color: #3d2c1b;
+            letter-spacing: -0.3px;
+            line-height: 1.3;
+            margin-bottom: 1.2rem;
+        }
+
+        .card-white h2 {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #5c3f28;
+            margin: 1.6rem 0 1rem 0;
+            border-left: 6px solid #dc9f76;
+            padding-left: 1rem;
+        }
+
+        .card-white h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #6e4d33;
+            margin-top: 1.8rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .card-white p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #2f231b;
+            margin-bottom: 1.2rem;
+        }
+
+        .card-white a {
+            color: #a45b32;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.1rem 0.2rem;
+            border-radius: 20px;
+            transition: all 0.15s;
+            background: transparent;
+        }
+
+        .card-white a:hover {
+            background: #f2d7bf;
+            color: #542d14;
+            box-shadow: 0 2px 6px rgba(180, 90, 30, 0.1);
+        }
+
+        /* 圆角按钮感链接 —— 用在场景模块里 */
+        .link-button {
+            display: inline-block;
+            background: #f3dac2;
+            padding: 0.5rem 1.8rem;
+            border-radius: 40px;
+            font-weight: 500;
+            color: #482f1d;
+            transition: 0.2s;
+            margin-top: 0.3rem;
+            border: 1px solid #e6c4a8;
+            box-shadow: 0 2px 6px rgba(130, 70, 30, 0.06);
+            text-decoration: none;
+        }
+
+        .link-button:hover {
+            background: #e7c3a4;
+            transform: scale(1.02);
+            border-color: #bf8f6b;
+            color: #2f1d0f;
+        }
+
+        /* 三场景网格 */
+        .scene-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.8rem;
+            margin: 2rem 0 1.2rem 0;
+        }
+
+        .scene-item {
+            background: #fffbf5;
+            border-radius: 30px;
+            padding: 1.8rem 1.5rem;
+            border: 1px solid #eddccb;
+            transition: 0.15s;
+        }
+
+        .scene-item h4 {
+            font-size: 1.2rem;
+            font-weight: 530;
+            margin-bottom: 0.6rem;
+            color: #4d3727;
+        }
+
+        .scene-item p {
+            font-size: 0.95rem;
+            color: #362a20;
+        }
+
+        .scene-item .meta-tag {
+            display: inline-block;
+            margin-top: 0.8rem;
+            background: #e6cfba;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: #4d321f;
+        }
+
+        /* FAQ摘要区域 使用紧凑卡片 */
+        .faq-mini {
+            background: #fcf3e9;
+            border-radius: 28px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0 0.6rem 0;
+        }
+
+        .faq-mini details {
+            margin-bottom: 1rem;
+            border-bottom: 1px dashed #dbbc9f;
+            padding-bottom: 0.8rem;
+        }
+
+        .faq-mini summary {
+            font-weight: 500;
+            color: #4b3625;
+            cursor: pointer;
+            padding: 0.3rem 0;
+        }
+
+        .faq-mini summary::-webkit-details-marker {
+            color: #b27952;
+        }
+
+        .faq-mini p {
+            margin: 0.6rem 0 0.2rem 0;
+            font-size: 0.95rem;
+            color: #2b1f16;
+        }
+
+        .footnote {
+            text-align: center;
+            margin-top: 2rem;
+            color: #5e3c25;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            padding: 1rem 0 0.2rem 0;
+        }
+
+        /* 响应式 */
+        @media (max-width: 780px) {
+            .card-white {
+                padding: 2rem 1.5rem;
+            }
+
+            .scene-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+
+            .top-nav {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.8rem;
+                border-radius: 32px;
+                padding: 1rem 1.8rem;
+            }
+
+            .nav-links {
+                gap: 1.2rem;
+            }
+
+            .card-white h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 1rem 0.8rem;
+            }
+
+            .card-white {
+                border-radius: 28px;
+                padding: 1.5rem 1rem;
+            }
+
+            .faq-mini {
+                padding: 1rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+    <!-- 顶部导航 -->
+    <nav class="top-nav">
+        <span class="logo-area">📋 索引·导航</span>
+        <div class="nav-links">
+            <a href="#intro">整理说明</a>
+            <a href="#scenes">应用场景</a>
+            <a href="#faq">常见说明</a>
+        </div>
+    </nav>
+
+    <!-- 核心介绍 hero + 索引概览 -->
+    <div class="card-white" id="intro">
+        <h1>资料整理视角下的<br>「买球站」信息索引</h1>
+        <p>
+            从信息归类与资源索引的角度出发，我们梳理了围绕 <a href="https://cn-cnwebs-maiqiu.com">买球站</a> 的相关资料结构。
+            本页并不试图替代任何官方或权威指南，而是将分散的参考线索集中到一起，方便使用者按图索骥。
+        </p>
+        <p>
+            作为一个长期存在的内容聚合方向，「买球站」这个关键词所关联的页面、文档与常见讨论，往往被零散地放置在不同区域。
+            通过建立轻量导航，我们希望帮助新接触者更快地理解背景、模块和注意事项。以下内容均基于可公开查阅的信息整理而成。
+        </p>
+        <p style="margin-top: 0.4rem;">
+            <span style="background: #edd9c6; padding: 0.2rem 1.2rem; border-radius: 40px; font-size: 0.9rem;">📎 更新于近期资料归档</span>
+        </p>
+    </div>
+
+    <!-- 三个场景模块 -->
+    <div class="card-white" id="scenes">
+        <h2>三个常见索引场景</h2>
+        <p>以下场景归纳了多数使用者查找 <a href="https://cn-cnwebs-maiqiu.com">买球站</a> 相关内容时的主要出发点，每个场景附有简要说明以及可参考的资料方向。</p>
+
+        <div class="scene-grid">
+            <div class="scene-item">
+                <h4>📂 场景一 · 术语与规则</h4>
+                <p>希望系统了解相关术语、常见的赛制说明以及统计口径。很多用户在初次接触时，会优先整理一套术语对照表。</p>
+                <span class="meta-tag">参考方向：基础词条</span>
+                <div style="margin-top: 0.6rem;"><a href="#" class="link-button" style="pointer-events: none; opacity: 0.7;">查阅归档</a></div>
+            </div>
+            <div class="scene-item">
+                <h4>📂 场景二 · 数据与记录</h4>
+                <p>部分使用者侧重于查找历史数据、队伍记录或近期动态。这类信息往往分布在多个归档页面中，需要建立交叉索引。</p>
+                <span class="meta-tag">参考方向：数据聚合</span>
+                <div style="margin-top: 0.6rem;"><a href="#" class="link-button" style="pointer-events: none; opacity: 0.7;">浏览条目</a></div>
+            </div>
+            <div class="scene-item">
+                <h4>📂 场景三 · 社区讨论摘要</h4>
+                <p>从讨论区、笔记平台收集的常见问答与经验汇总，内容涉及渠道、可信度以及常见误区，属于辅助参考。</p>
+                <span class="meta-tag">参考方向：讨论存档</span>
+                <div style="margin-top: 0.6rem;"><a href="#" class="link-button" style="pointer-events: none; opacity: 0.7;">摘要列表</a></div>
+            </div>
+        </div>
+
+        <p style="font-size: 0.95rem; margin-top: 1rem;">以上模块仅为索引框架示意，具体内容可依据需求逐步补充。每个场景都指向 <a href="https://cn-cnwebs-maiqiu.com">买球站</a> 中对应的资料分组。</p>
+    </div>
+
+    <!-- 常见说明 + FAQ摘要 -->
+    <div class="card-white" id="faq">
+        <h2>常见说明与简要提示</h2>
+        <p>在整理过程中，部分高频问题反复出现。以下是基于现有资料整理的摘要说明，供参考。</p>
+
+        <div class="faq-mini">
+            <details>
+                <summary>🔹 关于信息时效性</summary>
+                <p>本页所引用的来源均标注了收集日期。由于外部页面可能变动，建议定期核对原始出处。<a href="https://cn-cnwebs-maiqiu.com">买球站</a> 上的内容同样会经历更新，索引仅反映某一时间点的快照。</p>
+            </details>
+            <details>
+                <summary>🔹 索引范围说明</summary>
+                <p>目前整理的范围包括公开的术语解释、结构说明以及部分社区讨论。不涵盖任何非公开或需授权的内容。若需更详尽的资料，可参考主站目录。</p>
+            </details>
+            <details>
+                <summary>🔹 使用者注意事项</summary>
+                <p>任何索引都只是辅助工具。建议在获取信息后，结合多个来源交叉验证，尤其注意发布者的背景与更新时间。本页不提供具体建议或推荐。</p>
+            </details>
+            <details>
+                <summary>🔹 与主站的关系</summary>
+                <p>本页是一个独立的资料索引页，与 <a href="https://cn-cnwebs-maiqiu.com">买球站</a> 之间存在引用关联，但并不代表其官方立场。所有引用都注明出处。</p>
+            </details>
+        </div>
+
+        <p style="margin-top: 1.2rem; font-size: 0.95rem;">如果以上说明未能覆盖你的疑问，建议直接查阅 <a href="https://cn-cnwebs-maiqiu.com">买球站</a> 上的原始资料，或留意其页面内的更新日志。</p>
+    </div>
+
+    <!-- 底部简单落款 -->
+    <div class="footnote">
+        <span>资料整理索引 · 版本 2025.04 · 仅供信息参考</span>
+    </div>
+</div>
+</body>
+</html>
