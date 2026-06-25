@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ayx · 探索的起点</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f5f7fa;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+        .hero {
+            background: linear-gradient(145deg, #0b1a2e 0%, #1c3a4f 100%);
+            padding: 6rem 2rem 5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 40%, rgba(69, 160, 230, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: 0.04em;
+            color: #eef5ff;
+            margin-bottom: 1rem;
+        }
+        .hero h1 span {
+            font-weight: 600;
+            color: #b1d4f0;
+        }
+        .hero p {
+            max-width: 680px;
+            margin: 1.2rem auto 0;
+            font-size: 1.1rem;
+            color: #c6d9ec;
+            font-weight: 300;
+            border-left: 2px solid #4b8bb4;
+            padding-left: 1.2rem;
+            text-align: left;
+        }
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .main-section {
+            background: #ffffff;
+            padding: 3.5rem 0 4.5rem;
+        }
+        .intro-block {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+        .intro-text {
+            flex: 2;
+            min-width: 280px;
+        }
+        .intro-text h2 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: #1f2c3b;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+        .intro-text p {
+            margin-bottom: 1.2rem;
+            color: #2d3f51;
+        }
+        .intro-text .highlight-link {
+            color: #1f5f7a;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1px dotted #5f9ab5;
+            transition: border 0.2s, color 0.2s;
+        }
+        .intro-text .highlight-link:hover {
+            color: #0d3c55;
+            border-bottom: 1px solid #0d3c55;
+        }
+        .feature-cards {
+            flex: 1.2;
+            min-width: 220px;
+            background: #f0f4f9;
+            border-radius: 20px;
+            padding: 1.8rem 1.8rem 2rem;
+            align-self: flex-start;
+        }
+        .feature-cards h3 {
+            font-weight: 500;
+            font-size: 1.2rem;
+            color: #1b3547;
+            margin-bottom: 1.4rem;
+            letter-spacing: 0.02em;
+        }
+        .feature-cards ul {
+            list-style: none;
+        }
+        .feature-cards li {
+            padding: 0.7rem 0 0.7rem 1.8rem;
+            position: relative;
+            border-bottom: 1px solid #dce3ec;
+            font-size: 0.95rem;
+            color: #1f3b4e;
+        }
+        .feature-cards li:last-child {
+            border-bottom: none;
+        }
+        .feature-cards li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #3f7b9c;
+            font-size: 1.1rem;
+        }
+        .context-note {
+            background: #eaf0f7;
+            border-radius: 28px;
+            padding: 2.2rem 2.5rem;
+            margin: 2.5rem 0 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .context-note p {
+            font-size: 1rem;
+            color: #1f3345;
+            max-width: 800px;
+        }
+        .context-note .tag {
+            background: #d2dfec;
+            color: #1a3a4e;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            display: inline-block;
+            width: fit-content;
+            text-transform: lowercase;
+        }
+        .faq-mini {
+            margin: 2.8rem 0 1.2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.8rem;
+        }
+        .faq-item {
+            background: #f9fafc;
+            border-radius: 16px;
+            padding: 1.4rem 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .faq-item h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1e3c51;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.01em;
+        }
+        .faq-item p {
+            font-size: 0.9rem;
+            color: #355568;
+            line-height: 1.5;
+        }
+        .closing {
+            text-align: center;
+            padding: 3.2rem 0 4rem;
+            border-top: 1px solid #e2eaf2;
+            margin-top: 1.8rem;
+        }
+        .closing p {
+            font-size: 1rem;
+            color: #2b4259;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .closing .meta {
+            display: block;
+            margin-top: 1.2rem;
+            font-size: 0.8rem;
+            color: #62788d;
+            letter-spacing: 0.03em;
+        }
+        footer {
+            background: #e5ecf3;
+            padding: 1.8rem 0;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #44617a;
+        }
+        @media (max-width: 680px) {
+            .hero h1 { font-size: 2.4rem; }
+            .hero p { font-size: 1rem; padding-left: 0.8rem; }
+            .intro-block { flex-direction: column; }
+            .context-note { padding: 1.8rem 1.5rem; }
+            .faq-mini { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <h1>· <span>ayx</span> ·</h1>
+        <p>不在于抵达，而在于如何开始。一片未被定义的空间，等待被拆解、重组、重新命名。</p>
+    </header>
+
+    <section class="main-section">
+        <div class="container">
+            <div class="intro-block">
+                <div class="intro-text">
+                    <h2>一个关键词的剖面</h2>
+                    <p>三个字母，一组音节。表面是名称，背后是索引——指向技术、工具、平台，或只是一个尚未完全成型的想法。任何关键词都携带多层语境：<a href="https://master-ayx.com.cn" class="highlight-link">ayx</a> 并不试图用一句话概括自己，而是以自身为锚点，允许不同的解释体系在其周围沉淀。</p>
+                    <p>从信息结构的角度看，这类词往往充当着「边界对象」的角色——不同背景的使用者可以从中提取出符合自己需求的含义，而不会破坏其核心的指涉功能。也正因如此，它更适合被展开，而非被锁定。</p>
+                </div>
+                <div class="feature-cards">
+                    <h3>几个可描述的侧面</h3>
+                    <ul>
+                        <li>命名即框架 —— 一个词划定一片讨论域</li>
+                        <li>轻量且可扩展 —— 不预设过多限制</li>
+                        <li>跨语境适应性 —— 技术/内容/策略皆可介入</li>
+                        <li>无过度承诺 —— 先存在，再定义</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="context-note">
+                <span class="tag">场景提示</span>
+                <p>在信息架构中，一个简洁的标识往往比长篇描述更能承载变化。无论是作为项目代号、内容标签还是品牌识别，三个字母所腾出的空白，恰好留给后续的填充与迭代。不必急于赋予它唯一答案。</p>
+            </div>
+
+            <div class="faq-mini">
+                <div class="faq-item">
+                    <h4>这个关键词有唯一解释吗？</h4>
+                    <p>没有。其价值部分正来自于多义性。不同使用者可以基于自己的上下文赋予它功能或意义。</p>
+                </div>
+                <div class="faq-item">
+                    <h4>它指向某个具体产品？</h4>
+                    <p>可以指向某个域名、服务或命名空间，但更核心的是它作为一个可操作的符号存在。</p>
+                </div>
+                <div class="faq-item">
+                    <h4>我该如何使用它？</h4>
+                    <p>作为引用、标签、搜索词或起点。关键不在于它「是什么」，而在于你用它的上下文能「做什么」。</p>
+                </div>
+            </div>
+
+            <div class="closing">
+                <p>一个关键词的意义不在词典里，而在每一次被调用、被关联、被重新锚定的瞬间。<br>ayx 始终是一个开放结构——你可以从这里开始，但不必止于这里。</p>
+                <span class="meta">—— 叙述完毕 · 留白由你填充 ——</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <span>基于主题展开 · 以 <a href="https://master-ayx.com.cn" style="color:#1f5f7a; text-decoration:underline; font-weight:500;">ayx</a> 为锚点 · 无诱导·无锁定</span>
+        </div>
+    </footer>
+</body>
+</html>
